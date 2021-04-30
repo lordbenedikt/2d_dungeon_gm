@@ -15,6 +15,15 @@ function nextLevel() {
 	}
 }
 
+function cellBelow(x, y) {
+	var xPos = floor(x / 32);
+	var yPos = floor(y /32);
+	if(yPos != obj_controller.h-1) {
+		return obj_controller.level[xPos][yPos+1];
+	}
+	return -1;
+}
+
 function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, enemyCount) {
 	/*
 	-1 = nothing
@@ -82,7 +91,8 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 		do {
 			posX = floor(random(w));
 			posY = floor(random(h));
-		} until(level[posX][posY]==1);
+			
+		} until(level[posX][posY]==1 && point_distance(posX*32,posY*32,obj_player.x,obj_player.y) > 50);
 		//level[posX][posY] = 4;
 		instance_create_layer(posX*32+16,posY*32+24,layer_get_id("Characters"),obj_enemy);
 	}

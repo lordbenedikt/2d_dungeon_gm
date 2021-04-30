@@ -1,34 +1,33 @@
 with(obj_player) {
-	if(!collision_line(x,y,other.x,other.y, obj_wall, false, false) && point_distance(x,y,other.x,other.y) > 5) {
-		var dir = point_direction(other.x,other.y,x,y);
-		other.x += lengthdir_x(other.walkSpeed * (other.aggro ? 2 : 1),dir);
-		other.y += lengthdir_y(other.walkSpeed * (other.aggro ? 2 : 1),dir);
-	} else if (point_distance(x,y,other.x,other.y) > 5 && (!collision_line(x-16,y+3,other.x-16,other.y+3, obj_wall, false, false)
-				|| !collision_line(x+16,y+3,other.x+16,other.y+3, obj_wall, false, false)
-				|| !collision_line(x-13,y-sprite_height+3,other.x-13,other.y-sprite_height+3, obj_wall, false, false)
-				|| !collision_line(x+13,y-sprite_height+3,other.x+13,other.y-sprite_height+3, obj_wall, false, false)))
-	|| (other.aggro || point_distance(other.x,other.y,x,y) < 50) {
-		if(other.alarm[1]==-1) {
-			show_debug_message("Distance: " + string(findPath(other, self, other.ds_path)) + "\n");
-			other.alarm[1]=30;
-		}
-		if(!ds_list_empty(other.ds_path)) {
-			var goto = ds_list_find_value(other.ds_path, ds_list_size(other.ds_path)-1);
-			var xx = getXPos(goto)*32 + 16;
-			var yy = getYPos(goto)*32 + 16;
-			var dir = point_direction(other.x,other.y,xx,yy);
+	if(point_distance(x,y,other.x,other.y) < 500) {
+		if(!collision_line(x,y,other.x,other.y, obj_wall, false, false) && point_distance(x,y,other.x,other.y) > 5) {
+			var dir = point_direction(other.x,other.y,x,y);
 			other.x += lengthdir_x(other.walkSpeed * (other.aggro ? 2 : 1),dir);
 			other.y += lengthdir_y(other.walkSpeed * (other.aggro ? 2 : 1),dir);
-			if(point_distance(other.x, other.y, xx, yy) < 10) {
-				ds_list_delete(other.ds_path, ds_list_size(other.ds_path)-1);
+		} else if (point_distance(x,y,other.x,other.y) > 5 && (!collision_line(x-16,y+3,other.x-16,other.y+3, obj_wall, false, false)
+					|| !collision_line(x+16,y+3,other.x+16,other.y+3, obj_wall, false, false)
+					|| !collision_line(x-13,y-sprite_height+3,other.x-13,other.y-sprite_height+3, obj_wall, false, false)
+					|| !collision_line(x+13,y-sprite_height+3,other.x+13,other.y-sprite_height+3, obj_wall, false, false)))
+		|| (other.aggro || point_distance(other.x,other.y,x,y) < 50) {
+			if(other.alarm[1]==-1) {
+				findPath(other, self, other.ds_path);
+				other.alarm[1]=30;
 			}
-		}
-	} else {
-		with(other) {
-			if(!place_meeting(x+wanderXSpeed, y, obj_wall)) x += wanderXSpeed;
-			if(!place_meeting(x, y+wanderYSpeed, obj_wall)) y += wanderYSpeed;
-			wanderXSpeed = clamp(wanderXSpeed + random(0.1) - 0.05, -0.3, 0.3);
-			wanderYSpeed = clamp(wanderYSpeed + random(0.1) - 0.05, -0.3, 0.3);
+			if(!ds_list_empty(other.ds_path)) {
+				var goto = ds_list_find_value(other.ds_path, ds_list_size(other.ds_path)-1);
+				var xx = getXPos(goto)*32 + 16;
+				var yy = getYPos(goto)*32 + 16;
+				var dir = point_direction(other.x,other.y,xx,yy);
+				other.x += lengthdir_x(other.walkSpeed * (other.aggro ? 2 : 1),dir);
+				other.y += lengthdir_y(other.walkSpeed * (other.aggro ? 2 : 1),dir);
+				if(point_distance(other.x, other.y, xx, yy) < 10) {
+					ds_list_delete(other.ds_path, ds_list_size(other.ds_path)-1);
+				}
+			}
+		} else {
+			with(other) {
+				wander();
+			}
 		}
 	}
 }

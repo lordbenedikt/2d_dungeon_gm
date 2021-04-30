@@ -1,6 +1,23 @@
+global.Drawable = function(_sprite, _x, _y) constructor {
+	sprite = _sprite;
+	x = _x;
+	y = _y;
+}
 
 global.ds_flash = ds_map_create()
 global.ds_depthsort = ds_grid_create(2,1)
+global.ds_tooltip = ds_queue_create();
+
+function draw_tooltip(sprite, x, y) {
+	ds_queue_enqueue(global.ds_tooltip, new global.Drawable(sprite, x, y));
+}
+
+function wander() {
+	if(!place_meeting(x+wanderXSpeed, y, obj_wall)) x += wanderXSpeed;
+	if(!place_meeting(x, y+wanderYSpeed, obj_wall)) y += wanderYSpeed;
+	wanderXSpeed = clamp(wanderXSpeed + random(0.1) - 0.05, -0.3, 0.3);
+	wanderYSpeed = clamp(wanderYSpeed + random(0.1) - 0.05, -0.3, 0.3);
+}
 
 function fallToFloor() {
 	if(travelTime > 0) {

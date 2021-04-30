@@ -68,8 +68,8 @@
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"f6002cda-7fbd-4e63-b11d-330dc062971b","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
-    "name": "Dungeon",
-    "path": "Dungeon.yyp",
+    "name": "Sprites",
+    "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_barrel",

@@ -1,4 +1,8 @@
-/// @desc Create shadow caster polygon
+image_speed = 0;
+
+if(cellBelow(x,y) == 1) {
+	image_index = 1;
+}
 
 // Inherit the parent event
 event_inherited();
