@@ -1,14 +1,16 @@
 function restart() {
 	with(obj_controller) {
+		global.blackScreen = true;
+		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);
 		global.hp = 100;
 		global.currentLevel = 1;
 		global.arrows = 3;
-		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);
 	}
 }
 
 function nextLevel() {
 	with(obj_controller) {
+		global.blackScreen = true;
 		global.keyFound = false;
 		global.currentLevel++;
 		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);

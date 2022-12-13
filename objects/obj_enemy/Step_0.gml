@@ -32,6 +32,23 @@ with(obj_player) {
 	}
 }
 
+_inst = instance_place(x,y,obj_wall)
+while (_inst != noone) {
+//	yy = y - _inst.y
+//	xx = x - _inst.x
+//	y_abs = abs(yy)
+//	x_abs = abs(xx)
+//	if y_abs < x_abs {
+//		y += sign(yy)
+//	} else {
+//		x += sign(xx)
+//	}
+	_dir = point_direction(_inst.x + _inst.sprite_width / 2, _inst.y + _inst.sprite_height/ 2, x, y)	
+	x += lengthdir_x(1, _dir)
+	y += lengthdir_y(1, _dir)
+	_inst = instance_place(x,y,obj_wall)
+}
+
 if(hp <= 0) {
 	instance_destroy();
 }

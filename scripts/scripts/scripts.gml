@@ -7,6 +7,7 @@ global.Drawable = function(_sprite, _x, _y) constructor {
 global.ds_flash = ds_map_create()
 global.ds_depthsort = ds_grid_create(2,1)
 global.ds_tooltip = ds_queue_create();
+global.blackScreen = false
 
 function draw_tooltip(sprite, x, y) {
 	ds_queue_enqueue(global.ds_tooltip, new global.Drawable(sprite, x, y));
@@ -39,8 +40,7 @@ function hitEnemy(enemy){
 		other, true, false)
 }
 function flash(obj) {
-	global.ds_flash[? obj] = 1
-	obj.flashColor = c_white
+	flashColor(obj, c_white)
 }
 function flashColor(obj, color) {
 	global.ds_flash[? obj] = 1
@@ -72,6 +72,12 @@ function drawSorted(parentObj) {
 		with(inst) {
 			draw_self()
 			drawFlashEffect()
+			if (variable_instance_exists(id, "drawables")) {
+				for (j=0; j<ds_list_size(drawables); j++) {
+					drawable = ds_list_find_value(drawables, j)
+					draw_sprite_ext(drawable.sprite, 0, x + drawable.x, y + drawable.y, 1, 1, 0, c_white, 1)
+				}
+			}
 		}
 		i++
 	}
@@ -86,4 +92,12 @@ function drawFlashEffect() {
 		}
 		gpu_set_fog(false, c_white, 0, 0)
 	}
+}
+function getGain(source, listener, max_distance) {
+	_dist = point_distance(source.x,source.y, listener.x, listener.y)
+	return clamp((max_distance - 1 * _dist) / max_distance,0,100)
+}
+function audio_play_random(soundids, priority, loops, gain = 1) {
+	_index = irandom_range(0,array_length(soundids) - 1);
+	audio_play_sound(soundids[_index], priority, loops, gain)
 }
