@@ -1,5 +1,3 @@
-moveSpeed = 1.5
-
 xAxis = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 yAxis = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 

@@ -1,10 +1,10 @@
 function restart() {
 	with(obj_controller) {
 		global.blackScreen = true;
-		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);
 		global.hp = 100;
 		global.currentLevel = 1;
 		global.arrows = 3;
+		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);
 	}
 }
 
@@ -23,7 +23,7 @@ function cellBelow(x, y) {
 	if(yPos != obj_controller.h-1) {
 		return obj_controller.level[xPos][yPos+1];
 	}
-	return -1;
+	return [-1,-1];
 }
 
 function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, enemyCount) {
@@ -36,6 +36,7 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 	randomize();
 	
 	layer_destroy_instances(layer_get_id("Floor"));
+	layer_destroy_instances(layer_get_id("Exit"));
 	layer_destroy_instances(layer_get_id("Stuff"));
 	layer_destroy_instances(layer_get_id("Arrows"));
 	layer_destroy_instances(layer_get_id("Characters"));
@@ -86,7 +87,7 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 		posY = floor(random(h));
 	} until(level[posX][posY]==1);
 	//level[posX][posY] = 3;
-	instance_create_layer(posX*32,posY*32,layer_get_id("Stuff"),obj_trapdoor);
+	instance_create_layer(posX*32,posY*32,layer_get_id("Exit"),obj_trapdoor);
 	
 	// place enemies
 	for(i = 0; i<enemyCount; i++) {
@@ -94,9 +95,18 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 			posX = floor(random(w));
 			posY = floor(random(h));
 			
-		} until(level[posX][posY]==1 && point_distance(posX*32,posY*32,obj_player.x,obj_player.y) > 50);
+		} until(level[posX][posY]==1 && point_distance(posX*32,posY*32,obj_player.x,obj_player.y) >80);
 		//level[posX][posY] = 4;
-		instance_create_layer(posX*32+16,posY*32+24,layer_get_id("Characters"),obj_enemy);
+		var enemy_types = [obj_enemy];
+		if (global.currentLevel > 3) {
+			array_push(enemy_types, obj_enemy);
+			array_push(enemy_types, obj_enemy_ram);
+		}
+		if (global.currentLevel > 5) {
+			array_push(enemy_types, obj_enemy_ram);
+		}
+		var enemy_type = enemy_types[irandom(array_length(enemy_types)-1)];
+		instance_create_layer(posX*32+16,posY*32+24,layer_get_id("Characters"),enemy_type);
 	}
 	
 	// place barrels
