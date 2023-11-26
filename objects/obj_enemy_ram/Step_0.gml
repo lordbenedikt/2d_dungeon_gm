@@ -25,6 +25,6 @@ if (cooldown==0) {
 
 if (attack_timer==0) {
 	walkSpeed = originalWalkSpeed;
-	speed = 6 * global.speedMultiplier;
+	speed = 7 * global.speedMultiplier;
 }
 

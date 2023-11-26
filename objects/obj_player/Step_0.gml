@@ -6,7 +6,7 @@ len = sqrt(power(xAxis,2) + power(yAxis,2));
 
 if xAxis != 0 || yAxis != 0 {
 	if !is_walking {
-		audio_play_sound(snd_footsteps_hall,0,1)
+		audio_play_sound(snd_footsteps_hall,0,1, 0.6 * global.masterVolume)
 		is_walking = true
 	}
 } else {
@@ -28,7 +28,7 @@ if(len != 0) {
 with(obj_arrow) {
 	if(travelTime <= 0) {
 		if(point_distance(other.x, other.y, x+lengthdir_x(8,image_angle), y+lengthdir_y(8,image_angle)) < 12) {
-			audio_play_sound(snd_pick_up_arrow_2,0,0)
+			audio_play_sound(snd_pick_up_arrow_2,0,0, global.masterVolume);
 			instance_destroy(self);
 			global.arrows++;
 		}

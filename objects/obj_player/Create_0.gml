@@ -1,3 +1,5 @@
+radius = sprite_width / 2;
+
 moveSpeed = 1.5 * global.speedMultiplier;
 
 is_walking = false

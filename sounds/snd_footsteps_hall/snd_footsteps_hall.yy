@@ -19,5 +19,5 @@
   "sampleRate": 44100,
   "soundFile": "snd_footsteps_hall.ogg",
   "type": 0,
-  "volume": 0.64,
+  "volume": 1.0,
 }

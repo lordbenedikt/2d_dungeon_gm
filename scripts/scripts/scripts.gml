@@ -8,7 +8,7 @@ global.ds_flash = ds_map_create()
 global.ds_depthsort = ds_grid_create(2,1)
 global.ds_tooltip = ds_queue_create();
 global.blackScreen = false
-global.speedMultiplier = 1.3;
+global.speedMultiplier = 1.0;
 
 function draw_tooltip(sprite, x, y) {
 	ds_queue_enqueue(global.ds_tooltip, new global.Drawable(sprite, x, y));
@@ -34,6 +34,7 @@ function fallToFloor() {
 		}
 	}
 }
+
 function hitEnemy(enemy){
 	return collision_rectangle(
 		enemy.x - enemy.sprite_xoffset, enemy.y - enemy.sprite_height,
@@ -65,14 +66,20 @@ function drawSorted(parentObj) {
 	depthsort(parentObj)
 	var dgrid = global.ds_depthsort
 	var inst
+	var _objs_with_shadow = [obj_player, obj_enemy, obj_enemy_ram, obj_spider, 
+		obj_spider_small, obj_barrel, obj_health_potion];
 
 	var i = 0; repeat(ds_grid_height(dgrid)) {
 		//pull out id
 		inst = dgrid[# 0, i]
 		//draw each instance
 		with(inst) {
-			draw_self()
-			drawFlashEffect()
+			if (array_contains(_objs_with_shadow, object_index)) {
+				var _shadow_scale = 2.5 * radius / sprite_get_width(spr_shadow);
+				draw_sprite_ext(spr_shadow,0,x,y,_shadow_scale,_shadow_scale,0,c_white,1);
+			}
+			draw_self();
+			drawFlashEffect();
 			if (variable_instance_exists(id, "drawables")) {
 				for (j=0; j<ds_list_size(drawables); j++) {
 					drawable = ds_list_find_value(drawables, j)
@@ -88,7 +95,8 @@ function drawFlashEffect() {
 	if(global.ds_flash[? self] != undefined) {
 		gpu_set_fog(true, id.flashColor, 0, 1)
 		if(global.ds_flash[? self] > 0) {
-			draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, global.ds_flash[? self])
+			show_debug_message("< flash: {0} >", image_index);
+			draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, global.ds_flash[? self])
 			global.ds_flash[? self] -= 0.1;
 		}
 		gpu_set_fog(false, c_white, 0, 0)
@@ -96,7 +104,7 @@ function drawFlashEffect() {
 }
 function getGain(source, listener, max_distance) {
 	_dist = point_distance(source.x,source.y, listener.x, listener.y)
-	return clamp((max_distance - 1 * _dist) / max_distance,0,100)
+	return clamp((max_distance - _dist) / max_distance,0,1) * global.masterVolume;
 }
 function audio_play_random(soundids, priority, loops, gain = 1) {
 	_index = irandom_range(0,array_length(soundids) - 1);

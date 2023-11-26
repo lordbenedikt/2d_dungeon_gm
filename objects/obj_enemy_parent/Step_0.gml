@@ -38,6 +38,8 @@ with(obj_player) {
 	}
 }
 
+solve_overlap_circle();
+
 _inst = instance_place(x,y,obj_wall)
 while (_inst != noone) {
 //	yy = y - _inst.y

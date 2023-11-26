@@ -8,3 +8,11 @@ walkSpeed = originalWalkSpeed;
 wanderXSpeed = 0;
 wanderYSpeed = 0;
 seesPlayer = false;
+radius = sprite_width / 2;
+
+onTakeDamage = function() {
+	if (!aggro) {
+		aggro = true;
+		image_index = 1;
+	}
+}

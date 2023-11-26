@@ -1,10 +1,11 @@
 function restart() {
 	with(obj_controller) {
 		global.blackScreen = true;
-		global.hp = 100;
 		global.currentLevel = 1;
-		global.arrows = 3;
 		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);
+		global.hp = 100;
+		global.arrows = 3;
+		global.gameOver = false;
 	}
 }
 
@@ -104,6 +105,11 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 		}
 		if (global.currentLevel > 5) {
 			array_push(enemy_types, obj_enemy_ram);
+			array_push(enemy_types, obj_spider);
+		}
+		if (global.currentLevel > 7) {
+			array_delete(enemy_types,0,1)
+			array_push(enemy_types, obj_spider);
 		}
 		var enemy_type = enemy_types[irandom(array_length(enemy_types)-1)];
 		instance_create_layer(posX*32+16,posY*32+24,layer_get_id("Characters"),enemy_type);

@@ -19,5 +19,5 @@
   "sampleRate": 44100,
   "soundFile": "snd_arrow_hit_hall.ogg",
   "type": 0,
-  "volume": 0.45,
+  "volume": 1.0,
 }
