@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"key_bindings",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"key_bindings",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Rooms/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

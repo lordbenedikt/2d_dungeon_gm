@@ -1,10 +1,40 @@
-xAxis = keyboard_check(ord("D")) - keyboard_check(ord("A"));
-yAxis = keyboard_check(ord("S")) - keyboard_check(ord("W"));
+var _move_unit = key_binding.move_vec()
+var _move_v = _move_unit.mult(moveSpeed);
 
-dir = point_direction(0,0,xAxis,yAxis);
-len = sqrt(power(xAxis,2) + power(yAxis,2));
+var _aim_unit = key_binding.aim_vec()
+var _aim_v = _aim_unit.mult(aim_speed);
 
-if xAxis != 0 || yAxis != 0 {
+target.x += _aim_v.x;
+target.y += _aim_v.y;
+
+if (key_binding.aim_vec_input.vec_input_device == VEC_INPUT_DEVICE.MOUSE) {
+	target.x = mouse_x;
+	target.y = mouse_y;
+} else {
+	var _target_dist = point_distance(x,y+arrow_rel_y,target.x,target.y);
+	var _target_max_dist = 30;
+	var _target_correction_length = max(_target_dist - _target_max_dist, 0);
+	var _target_correction_dir = point_direction(target.x,target.y,x,y+arrow_rel_y);
+	target.x += lengthdir_x(_target_correction_length,_target_correction_dir);
+	target.y += lengthdir_y(_target_correction_length,_target_correction_dir);
+}
+
+if key_binding.shoot() {
+	flash = 1;
+
+	if(global.arrows != 0) {
+		audio_play_sound(snd_arrow_shoot,0,0)
+		global.arrows--
+		var _arrow = instance_create_layer(x, y+arrow_rel_y, layer_get_id("Arrows"), obj_arrow);
+		var _dir = point_direction(x, y-10, target.x, target.y)
+		_arrow.direction = _dir;
+		_arrow.image_angle = _dir;
+		_arrow.speed = 8 * global.speedMultiplier;
+		_arrow.travelTime = round(30 / global.speedMultiplier);
+	}
+}
+
+if _move_unit.x != 0 || _move_unit.y != 0 {
 	if !is_walking {
 		audio_play_sound(snd_footsteps_hall,0,1, 0.6 * global.masterVolume)
 		is_walking = true
@@ -16,12 +46,14 @@ if xAxis != 0 || yAxis != 0 {
 	}
 }
 
-if(len != 0) {
-	if(!place_meeting(x+lengthdir_x(moveSpeed, dir), y, obj_wall)) {
-		x += lengthdir_x(moveSpeed, dir);
+if(_move_v.mag()) {
+	if(!place_meeting(x+_move_v.x, y, obj_wall)) {
+		x += _move_v.x;
+		target.x += _move_v.x;
 	}
-	if(!place_meeting(x,y+lengthdir_y(moveSpeed, dir), obj_wall)) {
-		y += lengthdir_y(moveSpeed, dir);
+	if(!place_meeting(x,y+_move_v.y, obj_wall)) {
+		y += _move_v.y;
+		target.y += _move_v.y;
 	}
 }
 

@@ -36,6 +36,12 @@ function fallToFloor() {
 }
 
 function hitEnemy(enemy){
+	if (enemy.object_index == obj_bat) {
+		return collision_circle(
+			enemy.x, enemy.y - sprite_height / 2,
+			enemy.radius,
+			other, true, false)
+	}
 	return collision_rectangle(
 		enemy.x - enemy.sprite_xoffset, enemy.y - enemy.sprite_height,
 		enemy.x + enemy.sprite_xoffset, enemy.y + enemy.sprite_height - enemy.sprite_yoffset,
@@ -67,7 +73,7 @@ function drawSorted(parentObj) {
 	var dgrid = global.ds_depthsort
 	var inst
 	var _objs_with_shadow = [obj_player, obj_enemy, obj_enemy_ram, obj_spider, 
-		obj_spider_small, obj_barrel, obj_health_potion];
+		obj_spider_small, obj_bat, obj_barrel, obj_health_potion];
 
 	var i = 0; repeat(ds_grid_height(dgrid)) {
 		//pull out id
@@ -95,7 +101,6 @@ function drawFlashEffect() {
 	if(global.ds_flash[? self] != undefined) {
 		gpu_set_fog(true, id.flashColor, 0, 1)
 		if(global.ds_flash[? self] > 0) {
-			show_debug_message("< flash: {0} >", image_index);
 			draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, global.ds_flash[? self])
 			global.ds_flash[? self] -= 0.1;
 		}

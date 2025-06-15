@@ -1,3 +1,9 @@
+for (var i = 0; i < 15; i++) {
+    if (gamepad_is_connected(i)) {
+        show_debug_message("Gamepad " + string(i) + " connected");
+    }
+}
+
 global.gameOver = false;
 global.keyFound = false;
 global.arrows = 3;

@@ -7,6 +7,12 @@ global.animation_frames[? obj_spider][? ACTOR_STATE.WALK] = [4,10];
 global.animation_frames[? obj_spider][? ACTOR_STATE.DIE] = [0,4];
 global.animation_frames[? obj_spider_small] = global.animation_frames[? obj_spider];
 
+global.animation_frames[? obj_bat] = ds_map_create();
+global.animation_frames[? obj_bat][? ACTOR_STATE.IDLE] = [1,4];
+global.animation_frames[? obj_bat][? ACTOR_STATE.ATTACK] = [1,4];
+global.animation_frames[? obj_bat][? ACTOR_STATE.WALK] = [1,4];
+global.animation_frames[? obj_bat][? ACTOR_STATE.DIE] = [0,1];
+
 enum ACTOR_STATE {
 	IDLE,
 	WALK,
@@ -39,6 +45,5 @@ function animate() {
 	var _anim_frame_count = _start_end[1] - _start_end[0];
 	anim_frame = (anim_frame + anim_speed) % _anim_frame_count;
 	var _col_start_frame = anim_cols * dir;
-	show_debug_message("col_start_frame: {0}, anim_cols: {1}, dir: {2}", _col_start_frame, anim_cols, dir);
 	image_index = _col_start_frame + _start_end[0] + floor(anim_frame);
 }

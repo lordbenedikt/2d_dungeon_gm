@@ -3,6 +3,7 @@ aggro = false;
 ds_path = ds_list_create();
 
 image_speed = 0;
+flying = false;
 originalWalkSpeed = random_range(0.4,0.55) * global.speedMultiplier;
 walkSpeed = originalWalkSpeed;
 wanderXSpeed = 0;

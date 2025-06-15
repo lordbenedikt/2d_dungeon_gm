@@ -1,10 +1,12 @@
+var target 
+
 seesPlayer = false;
 
 with(obj_player) {
-	if (point_distance(x,y,other.x,other.y) < 500
-	&& !collision_line(x,y,other.x,other.y, obj_wall, false, false)) {
-		other.seesPlayer = true;
+	if other.seesPlayer {
+		break;
 	}
+	other.seesPlayer = is_in_sight(other);
 	if (other.seesPlayer && point_distance(x,y,other.x,other.y) > 5) {
 		var dir = point_direction(other.x,other.y,x,y);
 		other.x += lengthdir_x(other.walkSpeed * (other.aggro ? 2 : 1),dir);
@@ -38,9 +40,9 @@ with(obj_player) {
 	}
 }
 
-solve_overlap_circle();
+solve_overlap_circle(obj_enemy_parent);
 
-_inst = instance_place(x,y,obj_wall)
+var _inst = instance_place(x,y,obj_wall)
 while (_inst != noone) {
 //	yy = y - _inst.y
 //	xx = x - _inst.x
@@ -51,7 +53,7 @@ while (_inst != noone) {
 //	} else {
 //		x += sign(xx)
 //	}
-	_dir = point_direction(_inst.x + _inst.sprite_width / 2, _inst.y + _inst.sprite_height/ 2, x, y)	
+	var _dir = point_direction(_inst.x + _inst.sprite_width / 2, _inst.y + _inst.sprite_height/ 2, x, y)	
 	x += lengthdir_x(1, _dir)
 	y += lengthdir_y(1, _dir)
 	_inst = instance_place(x,y,obj_wall)

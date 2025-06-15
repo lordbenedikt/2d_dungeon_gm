@@ -55,11 +55,8 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
     cleanMap();
 	// if map is defective
 	if(!isConnected()) {
-		show_debug_message("Not Connected!");
 		generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, enemyCount);
 		return;
-	} else {
-		show_debug_message("\nConnected\n");
 	}
 	
 	for (j = 0; j<h; j++) {
@@ -110,6 +107,10 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 		if (global.currentLevel > 7) {
 			array_delete(enemy_types,0,1)
 			array_push(enemy_types, obj_spider);
+			array_push(enemy_types, obj_bat);
+		}
+		if (global.currentLevel > 9) {
+			array_push(enemy_types, obj_bat);
 		}
 		var enemy_type = enemy_types[irandom(array_length(enemy_types)-1)];
 		instance_create_layer(posX*32+16,posY*32+24,layer_get_id("Characters"),enemy_type);
@@ -123,11 +124,8 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 				posX = floor(random(w));
 				posY = floor(random(h));
 			} until(level[posX][posY]==1);
-			show_debug_message(isConnected() ? "Con\n" : "Not Con\n");
 			level[posX][posY] = 0;
 			var valid = isConnected();
-			show_debug_message("overload1\n");
-			show_debug_message(isConnected() ? "Con\n" : "Not Con\n");
 			if(!valid) level[posX][posY] = 1;
 		} until(valid);
 		instance_create_layer(posX*32+16,posY*32+24,layer_get_id("Stuff"),obj_barrel);
@@ -237,7 +235,7 @@ function divide(iter, x1, x2, y1, y2, omit, horizontal) {
   if (horizontal) {
     if (y2-y1 < minRoomSize*2+2) return;
     do {
-		show_debug_message("overload2\n");
+		// show_debug_message("overload2\n");
       at = y1 + minRoomSize + floor(random(y2-y1-minRoomSize*2));
     } until (at!=omit);
     var nextOmit = floor(random(x2-x1))+x1;
@@ -267,7 +265,7 @@ function divide(iter, x1, x2, y1, y2, omit, horizontal) {
   } else {
     if (x2 - x1 < minRoomSize*2+2) return;
     do {
-		show_debug_message("overload3\n");
+		// show_debug_message("overload3\n");
       at = x1 + minRoomSize + floor(random(x2-x1-minRoomSize*2));
     } until (at!=omit);
     nextOmit = floor(random(y2-y1))+y1;
@@ -313,7 +311,7 @@ function findPath(origin, destination, ds_path) {
 	ds_list_add(ds_todo, cell);
 	
 	while(!ds_list_empty(ds_todo)) {
-		show_debug_message("overload5\n");
+		// show_debug_message("overload5\n");
 		var bestCell = undefined;
 		var bestValue = infinity;
 		var bestIndex = undefined;
@@ -353,7 +351,7 @@ function findPath(origin, destination, ds_path) {
 	while(tracker != cell && tracker != undefined) {
 		ds_list_add(ds_path, tracker);
 		tracker = ds_cameFrom[? tracker];
-		show_debug_message("overload");
+		// show_debug_message("overload");
 	}
 	
 	ds_map_destroy(ds_visited);
