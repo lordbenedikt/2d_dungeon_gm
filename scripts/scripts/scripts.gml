@@ -10,6 +10,19 @@ global.ds_tooltip = ds_queue_create();
 global.blackScreen = false
 global.speedMultiplier = 1.0;
 
+function check_game_over() {
+	var _all_players_dead = true;
+	with (obj_player) {
+		if(hp > 0) {
+			_all_players_dead = false;
+		}
+	}
+	if (_all_players_dead) {
+		global.gameOver = true;
+		restart();
+	}
+}
+
 function draw_tooltip(sprite, x, y) {
 	ds_queue_enqueue(global.ds_tooltip, new global.Drawable(sprite, x, y));
 }
@@ -80,11 +93,16 @@ function drawSorted(parentObj) {
 		inst = dgrid[# 0, i]
 		//draw each instance
 		with(inst) {
+			var _color = variable_instance_exists(inst, "color") ? inst.color : c_white;
 			if (array_contains(_objs_with_shadow, object_index)) {
 				var _shadow_scale = 2.5 * radius / sprite_get_width(spr_shadow);
 				draw_sprite_ext(spr_shadow,0,x,y,_shadow_scale,_shadow_scale,0,c_white,1);
 			}
-			draw_self();
+			draw_sprite_ext(inst.sprite_index, inst.image_index, 
+				inst.x, inst.y, 
+				inst.image_xscale, inst.image_yscale, 
+				inst.image_angle, 
+				_color, inst.image_alpha);
 			drawFlashEffect();
 			if (variable_instance_exists(id, "drawables")) {
 				for (j=0; j<ds_list_size(drawables); j++) {
@@ -114,4 +132,12 @@ function getGain(source, listener, max_distance) {
 function audio_play_random(soundids, priority, loops, gain = 1) {
 	_index = irandom_range(0,array_length(soundids) - 1);
 	audio_play_sound(soundids[_index], priority, loops, gain)
+}
+
+function objects_of_type(_obj_index) {
+	var _res = [];
+	with (_obj_index) {
+		array_push(_res, id);
+	}
+	return _res;
 }

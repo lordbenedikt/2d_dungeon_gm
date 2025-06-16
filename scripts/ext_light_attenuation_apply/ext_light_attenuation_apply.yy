@@ -6,7 +6,7 @@
   "name":"ext_light_attenuation_apply",
   "parent":{
     "name":"Attenuation",
-    "path":"folders/Rooms/Scripts/Lighting/Extension Modules/Attenuation.yy",
+    "path":"folders/Scripts/Lighting/Extension Modules/Attenuation.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

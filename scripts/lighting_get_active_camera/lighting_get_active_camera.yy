@@ -6,7 +6,7 @@
   "name":"lighting_get_active_camera",
   "parent":{
     "name":"Misc",
-    "path":"folders/Rooms/Scripts/Lighting/Misc.yy",
+    "path":"folders/Scripts/Lighting/Misc.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

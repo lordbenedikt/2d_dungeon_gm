@@ -6,7 +6,7 @@
   "name":"polygon_create",
   "parent":{
     "name":"Misc",
-    "path":"folders/Rooms/Scripts/Lighting/Misc.yy",
+    "path":"folders/Scripts/Lighting/Misc.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

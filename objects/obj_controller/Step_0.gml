@@ -1,3 +1,5 @@
+move_to_center(camera_target, objects_of_type(obj_player));
+
 for (var i = 0; i<20; i++) {
 	var val = gamepad_button_check(4, i);
 	if (val != 0) {
@@ -16,7 +18,4 @@ for (var i = 0; i<20; i++) {
 
 global.blackScreen = false
 
-if(global.hp <= 0) {
-	global.gameOver = true;
-	restart();
-}
+check_game_over();

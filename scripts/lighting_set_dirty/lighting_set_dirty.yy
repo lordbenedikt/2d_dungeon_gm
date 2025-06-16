@@ -6,7 +6,7 @@
   "name":"lighting_set_dirty",
   "parent":{
     "name":"Lighting",
-    "path":"folders/Rooms/Scripts/Lighting.yy",
+    "path":"folders/Scripts/Lighting.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

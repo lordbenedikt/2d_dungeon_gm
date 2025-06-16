@@ -1,5 +1,7 @@
 /// @desc Creates a light using variables
 
+obj_to_follow_id = undefined;
+
 // Create a light from the instance variables
 switch(Light_Type) {
 	case "Point Light":

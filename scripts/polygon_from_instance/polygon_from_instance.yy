@@ -6,7 +6,7 @@
   "name":"polygon_from_instance",
   "parent":{
     "name":"Misc",
-    "path":"folders/Rooms/Scripts/Lighting/Misc.yy",
+    "path":"folders/Scripts/Lighting/Misc.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"light_maintain_shadow_map",
   "parent":{
     "name":"Internal",
-    "path":"folders/Rooms/Scripts/Lighting/Lights/Internal.yy",
+    "path":"folders/Scripts/Lighting/Lights/Internal.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

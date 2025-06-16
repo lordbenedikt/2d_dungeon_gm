@@ -3,8 +3,10 @@ function restart() {
 		global.blackScreen = true;
 		global.currentLevel = 1;
 		generateMap(11+global.currentLevel, 11+global.currentLevel, 2, 8, 10, global.currentLevel);
-		global.hp = 100;
-		global.arrows = 3;
+		with (obj_player) {
+			hp = 100;
+			arrows = 100;
+		}
 		global.gameOver = false;
 	}
 }

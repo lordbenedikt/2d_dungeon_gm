@@ -22,9 +22,9 @@ if (key_binding.aim_vec_input.vec_input_device == VEC_INPUT_DEVICE.MOUSE) {
 if key_binding.shoot() {
 	flash = 1;
 
-	if(global.arrows != 0) {
+	if(arrows != 0) {
 		audio_play_sound(snd_arrow_shoot,0,0)
-		global.arrows--
+		arrows--
 		var _arrow = instance_create_layer(x, y+arrow_rel_y, layer_get_id("Arrows"), obj_arrow);
 		var _dir = point_direction(x, y-10, target.x, target.y)
 		_arrow.direction = _dir;
@@ -62,7 +62,7 @@ with(obj_arrow) {
 		if(point_distance(other.x, other.y, x+lengthdir_x(8,image_angle), y+lengthdir_y(8,image_angle)) < 12) {
 			audio_play_sound(snd_pick_up_arrow_2,0,0, global.masterVolume);
 			instance_destroy(self);
-			global.arrows++;
+			other.arrows++;
 		}
 	}
 }

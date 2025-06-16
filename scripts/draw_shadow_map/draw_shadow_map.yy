@@ -6,7 +6,7 @@
   "name":"draw_shadow_map",
   "parent":{
     "name":"Lighting",
-    "path":"folders/Rooms/Scripts/Lighting.yy",
+    "path":"folders/Scripts/Lighting.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

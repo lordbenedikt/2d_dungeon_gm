@@ -6,7 +6,7 @@
   "name":"light_static_set_array",
   "parent":{
     "name":"Static Storage",
-    "path":"folders/Rooms/Scripts/Lighting/Lights/Static Storage.yy",
+    "path":"folders/Scripts/Lighting/Lights/Static Storage.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

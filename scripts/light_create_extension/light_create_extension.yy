@@ -6,7 +6,7 @@
   "name":"light_create_extension",
   "parent":{
     "name":"Misc",
-    "path":"folders/Rooms/Scripts/Lighting/Lights/Misc.yy",
+    "path":"folders/Scripts/Lighting/Lights/Misc.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,4 +1,10 @@
-key_binding = keyboard_default();
+key_binding = snes_gp_default(5);
+
+color = #0054A6;
+
+arrows = 3;
+
+hp = 100;
 
 target = instance_create_layer(x,y,layer_get_id("Cursor"),obj_cursor);
 

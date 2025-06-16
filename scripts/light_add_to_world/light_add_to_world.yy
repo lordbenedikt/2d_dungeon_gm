@@ -6,7 +6,7 @@
   "name":"light_add_to_world",
   "parent":{
     "name":"Lights",
-    "path":"folders/Rooms/Scripts/Lighting/Lights.yy",
+    "path":"folders/Scripts/Lighting/Lights.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
