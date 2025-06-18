@@ -1,7 +1,3 @@
-key_binding = snes_gp_default(5);
-
-color = #0054A6;
-
 arrows = 3;
 
 hp = 100;

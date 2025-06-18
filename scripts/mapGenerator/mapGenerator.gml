@@ -50,8 +50,8 @@ function generateMap(levelWidth, levelHeight, roomSize, cutoutSize, iterations, 
 	minRoomSize = roomSize;
 	maxCutoutSize = cutoutSize;
 	
-	room_width = 32 * w;
-	room_height = 32 * h;
+	//room_width = 32 * w;
+	//room_height = 32 * h;
 	resetCells();
 	randomDivider();
     cleanMap();

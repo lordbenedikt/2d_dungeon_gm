@@ -75,6 +75,22 @@ function keyboard_default() {
 	);
 }
 
+function keyboard_ply2_default() {
+	return new PlayerKeyBinding(
+		DEVICE.KEYBOARD,
+		new VectorInput(
+			VEC_INPUT_DEVICE.KEYS, 
+			ord("T"), 
+			ord("G"), 
+			ord("F"), 
+			ord("H")
+		),
+		new VectorInput(VEC_INPUT_DEVICE.MOUSE),
+		new MouseButton(mb_left),
+		ord("E")
+	);
+}
+
 /// @struct VectorInput
 /// @param {VEC_INPUT_DEVICE} _vec_input_device - Joystick input type (GP_LEFT_STICK, GP_RIGHT_STICK, KEYS)
 /// @param {string} [_up] - Key for up movement (optional)

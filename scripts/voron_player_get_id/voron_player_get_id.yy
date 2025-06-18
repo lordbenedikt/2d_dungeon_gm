@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"voron_player_get_id",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"voron_player_get_id",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

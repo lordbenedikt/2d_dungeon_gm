@@ -3,8 +3,8 @@
   "%Name":"Shader3",
   "name":"Shader3",
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Dungeon",
+    "path":"Dungeon.yyp",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",
